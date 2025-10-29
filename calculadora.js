@@ -18,7 +18,11 @@ function actualizarPantalla() {
         elementoFraccion.textContent = '';
     }
 
-    elementoMemoria.textContent = memoria !== 0 ? memoria.toFixed(4) : '0';
+    if (memoria !== 0) {
+        elementoMemoria.textContent = `M: ${memoria.toFixed(4)}`;
+    } else {
+        elementoMemoria.textContent = '';
+    }
 }
 
 function aFraccion(decimal) {
@@ -54,9 +58,9 @@ function obtenerFraccion() {
 function evaluarExpresion(expr) {
     try {
         let expresionProcesada = expr
-            .replace(/sin\(/g, 'Math.sin(')
-            .replace(/cos\(/g, 'Math.cos(')
-            .replace(/tan\(/g, 'Math.tan(')
+            .replace(/sin\(/g, 'Math.sin((Math.PI/180)*')
+            .replace(/cos\(/g, 'Math.cos((Math.PI/180)*')
+            .replace(/tan\(/g, 'Math.tan((Math.PI/180)*')
             .replace(/ln\(/g, 'Math.log(')
             .replace(/log\(/g, 'Math.log10(')
             .replace(/√\(/g, 'Math.sqrt(')
@@ -87,36 +91,61 @@ function manejarNumero(num) {
 }
 
 function manejarOperador(op) {
-    expresion += op;
-    pantalla += op;
+    if (pantalla === '0' || pantalla === 'Error') {
+        pantalla = op;
+        expresion = op;
+    } else {
+        expresion += op;
+        pantalla += op;
+    }
     mostrarFraccion = false;
     actualizarPantalla();
 }
 
 function manejarFuncion(func) {
-    expresion += func + '(';
-    pantalla += func + '(';
+    if (pantalla === '0' || pantalla === 'Error') {
+        pantalla = func + '(';
+        expresion = func + '(';
+    } else {
+        expresion += func + '(';
+        pantalla += func + '(';
+    }
     mostrarFraccion = false;
     actualizarPantalla();
 }
 
 function manejarRaizCuadrada() {
-    expresion += '√(';
-    pantalla += '√(';
+    if (pantalla === '0' || pantalla === 'Error') {
+        pantalla = '√(';
+        expresion = '√(';
+    } else {
+        expresion += '√(';
+        pantalla += '√(';
+    }
     mostrarFraccion = false;
     actualizarPantalla();
 }
 
 function manejarPotencia() {
-    expresion += '^';
-    pantalla += '^';
+    if (pantalla === '0' || pantalla === 'Error') {
+        pantalla = '^';
+        expresion = '^';
+    } else {
+        expresion += '^';
+        pantalla += '^';
+    }
     mostrarFraccion = false;
     actualizarPantalla();
 }
 
 function manejarParentesis(tipo) {
-    expresion += tipo;
-    pantalla += tipo;
+    if (pantalla === '0' || pantalla === 'Error') {
+        pantalla = tipo;
+        expresion = tipo;
+    } else {
+        expresion += tipo;
+        pantalla += tipo;
+    }
     mostrarFraccion = false;
     actualizarPantalla();
 }
@@ -159,21 +188,26 @@ function manejarBorrar() {
 
 function manejarMemoriaSumar() {
     const actual = parseFloat(pantalla);
+    console.log('M+ presionado - Valor actual:', actual, 'Memoria antes:', memoria);
     if (!isNaN(actual)) {
         memoria += actual;
+        console.log('Memoria después:', memoria);
         actualizarPantalla();
     }
 }
 
 function manejarMemoriaRestar() {
     const actual = parseFloat(pantalla);
+    console.log('M- presionado - Valor actual:', actual, 'Memoria antes:', memoria);
     if (!isNaN(actual)) {
         memoria -= actual;
+        console.log('Memoria después:', memoria);
         actualizarPantalla();
     }
 }
 
 function manejarMemoriaRecuperar() {
+    console.log('M presionado - Recuperando memoria:', memoria);
     pantalla = memoria.toString();
     expresion = memoria.toString();
     mostrarFraccion = false;
@@ -181,13 +215,26 @@ function manejarMemoriaRecuperar() {
 }
 
 function manejarMemoriaLimpiar() {
+    console.log('MC presionado - Limpiando memoria');
     memoria = 0;
     actualizarPantalla();
 }
 
 function manejarAns() {
-    expresion += 'ans';
-    pantalla += 'ans';
+    if (pantalla === '0' || pantalla === 'Error') {
+        pantalla = 'ans';
+        expresion = 'ans';
+    } else {
+        // Si la pantalla termina con un número, añadir un operador de multiplicación implícito
+        const ultimoCaracter = pantalla[pantalla.length - 1];
+        if (ultimoCaracter >= '0' && ultimoCaracter <= '9') {
+            expresion += '×ans';
+            pantalla += '×ans';
+        } else {
+            expresion += 'ans';
+            pantalla += 'ans';
+        }
+    }
     mostrarFraccion = false;
     actualizarPantalla();
 }
