@@ -1,0 +1,88 @@
+
+.btn {
+  font-weight: 700;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+  border: none;
+  outline: none;
+}
+
+.btn-number {
+  background: #ffffff;
+  color: #111827;
+  padding: 0.75rem;
+}
+.btn-number:hover {
+  background: #f3f4f6;
+}
+
+.btn-operator {
+  background: #d1d5db;
+  color: #111827;
+  padding: 0.75rem;
+}
+.btn-operator:hover {
+  background: #9ca3af;
+}
+
+.btn-scientific {
+  background: #374151;
+  color: #ffffff;
+  padding: 0.5rem;
+  font-size: 0.75rem;
+}
+.btn-scientific:hover {
+  background: #1f2937;
+}
+
+.btn-clear {
+  background: #fb923c;
+  color: #ffffff;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.875rem;
+}
+.btn-clear:hover {
+  background: #f97316;
+}
+
+.btn-delete {
+  background: #fdba74;
+  color: #ffffff;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.875rem;
+}
+.btn-delete:hover {
+  background: #fb923c;
+}
+
+.btn-memory {
+  background: #4b5563;
+  color: #ffffff;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.75rem;
+}
+.btn-memory:hover {
+  background: #374151;
+}
+
+/* Botones secundarios (Ans, MC) */
+.btn-secondary {
+  background: #6b7280;
+  color: #ffffff;
+  padding: 0.75rem;
+  font-size: 0.75rem;
+}
+.btn-secondary:hover {
+  background: #4b5563;
+}
+
+/* Botón igual (=) */
+.btn-equals {
+  background: #3b82f6;
+  color: #ffffff;
+  padding: 0.75rem;
+}
+.btn-equals:hover {
+  background: #2563eb;
+}

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="global.css">
+</head>
+<body class="flex items-center justify-center min-h-screen bg-gradient-to-br from-gray-700 to-gray-900 p-4">
+    <div class="bg-gradient-to-b from-purple-300 to-purple-400 p-6 rounded-3xl shadow-2xl" style="width: 380px">
+        
+        <div class="bg-green-100 border-4 border-gray-600 rounded-lg p-4 mb-4 min-h-[100px]">
+            <div class="text-right">
+                <div class="text-xs text-gray-600 mb-1 h-4">Math</div>
+                <div id="display" class="text-2xl font-mono break-words min-h-[60px]">0</div>
+                <div id="fraction-display" class="text-sm text-gray-600 mt-1"></div>
+                <div id="memory-display" class="text-xs text-gray-700 mt-1">0</div>
+            </div>
+        </div>
+
+        <!-- Top buttons -->
+        <div class="grid grid-cols-5 gap-2 mb-2">
+            <button onclick="manejarLimpiar()" class="btn btn-clear">AC</button>
+            <button onclick="manejarBorrar()" class="btn btn-delete">DEL</button>
+            <button onclick="manejarMemoriaRecuperar()" class="btn btn-memory">M</button>
+            <button onclick="manejarMemoriaSumar()" class="btn btn-memory">M+</button>
+            <button onclick="manejarMemoriaRestar()" class="btn btn-memory">M-</button>
+        </div>
+
+        <!-- Scientific functions -->
+        <div class="grid grid-cols-5 gap-2 mb-2">
+            <button onclick="manejarFuncion('sin')" class="btn btn-scientific">sin</button>
+            <button onclick="manejarFuncion('cos')" class="btn btn-scientific">cos</button>
+            <button onclick="manejarFuncion('tan')" class="btn btn-scientific">tan</button>
+            <button onclick="manejarFuncion('log')" class="btn btn-scientific">log</button>
+            <button onclick="manejarFuncion('ln')" class="btn btn-scientific">ln</button>
+        </div>
+
+        <div class="grid grid-cols-5 gap-2 mb-2">
+            <button onclick="manejarRaizCuadrada()" class="btn btn-scientific">√</button>
+            <button onclick="manejarPotencia()" class="btn btn-scientific">x^y</button>
+            <button onclick="manejarFraccion()" class="btn btn-scientific">1/x</button>
+            <button onclick="manejarParentesis('(')" class="btn btn-scientific">(</button>
+            <button onclick="manejarParentesis(')')" class="btn btn-scientific">)</button>
+        </div>
+
+        <!-- Number pad and operations -->
+        <div class="grid grid-cols-5 gap-2">
+            <button onclick="manejarNumero('7')" class="btn btn-number">7</button>
+            <button onclick="manejarNumero('8')" class="btn btn-number">8</button>
+            <button onclick="manejarNumero('9')" class="btn btn-number">9</button>
+            <button onclick="manejarOperador('÷')" class="btn btn-operator">÷</button>
+            <button onclick="manejarAns()" class="btn btn-secondary">Ans</button>
+
+            <button onclick="manejarNumero('4')" class="btn btn-number">4</button>
+            <button onclick="manejarNumero('5')" class="btn btn-number">5</button>
+            <button onclick="manejarNumero('6')" class="btn btn-number">6</button>
+            <button onclick="manejarOperador('×')" class="btn btn-operator">×</button>
+            <button onclick="manejarMemoriaLimpiar()" class="btn btn-secondary">MC</button>
+
+            <button onclick="manejarNumero('1')" class="btn btn-number">1</button>
+            <button onclick="manejarNumero('2')" class="btn btn-number">2</button>
+            <button onclick="manejarNumero('3')" class="btn btn-number">3</button>
+            <button onclick="manejarOperador('-')" class="btn btn-operator">−</button>
+            <button onclick="manejarOperador('+')" class="btn btn-operator row-span-2">+</button>
+
+            <button onclick="manejarNumero('0')" class="btn btn-number col-span-2">0</button>
+            <button onclick="manejarNumero('.')" class="btn btn-number">.</button>
+            <button onclick="manejarIgual()" class="btn btn-equals">=</button>
+        </div>
+    </div>
+    
+    <script src="calculadora.js"></script>
+    
+</body>
+</html>
